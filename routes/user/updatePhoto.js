@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     let { id } = req.auth;
     
     const uploader = async (path) =>
-      await cloudinary.uploads(path, "UserAdminProfilphoto");
+      await cloudinary.uploads(path, "Userphoto");
     let { path } = req.file;
     const { url } = await uploader(path);
     fs.unlinkSync(path);
