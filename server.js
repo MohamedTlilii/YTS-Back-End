@@ -1,10 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+require("dotenv").config();
+
+
 const cors = require("cors");
 const path = require("path");
 
-require("dotenv").config();
 
 // environmentals varibales
 const DBURI = process.env.DBURI;
@@ -25,13 +27,12 @@ mongoose
 app.use(express.json());
 app.use(cors());
 
-// // api routes
-// app.use("/api/user", require("./routes/user"));
-// // user routes
-// app.use("/api/admin", require("./routes/admin"));
-// // admin routes
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-// // path fille uplod bech isob fi
+//routes
+app.use("/api/user", require("./routes/user"));
+// user routes
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// path fille uplod bech isob fi
 
 // listen to requests
 app.listen(PORT, (err) => {
