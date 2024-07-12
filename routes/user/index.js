@@ -18,7 +18,6 @@ route.get("/getInformation", verifiedToken, require("./GetInformation"));
 route.put("/updateInformation", verifiedToken, require("./updateInformation"));
 
 
-// https://yts-back-end.onrender.com
 // update user photo
 route.put(
   "/updatePhoto",
