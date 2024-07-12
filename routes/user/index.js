@@ -8,19 +8,25 @@ route.post("/register", require("./register"));
 // login
 route.post("/login", require("./login"));
 
-// // update user photo
-// route.put(
-//   "/updatePhoto",
-//   verifiedToken,
-//   upload.single("photo"),
-//   require("./updatePhoto")
-// );
 
-// // get information
-// route.get("/getInformation", verifiedToken, require("./GetInformation"));
 
-// // update information
-// route.put("/updateInformation", verifiedToken, require("./updateInformation"));
+
+// get information
+route.get("/getInformation", verifiedToken, require("./GetInformation"));
+
+// update information
+route.put("/updateInformation", verifiedToken, require("./updateInformation"));
+
+
+
+// update user photo
+route.put(
+  "/updatePhoto",
+  verifiedToken,
+  upload.single("photo"),
+  require("./updatePhoto")
+);
+
 
 // // get products
 // route.get("/getProducts", require("./getProducts"));
