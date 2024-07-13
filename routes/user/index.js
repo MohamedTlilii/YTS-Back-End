@@ -27,11 +27,6 @@ route.put(
 );
 
 
-// // get products
-// route.get("/getProducts", require("./getProducts"));
-
-// // get single product
-// route.get("/getSingleProduct/:id", require("./getSingleProduct"));
 
 
 

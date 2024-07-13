@@ -1,11 +1,13 @@
 const multer = require("multer");
+const path = require("path");
+
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, "uploads");
+    callback(null, "uploads/");
   },
   filename: (req, file, callback) => {
     const name = file.originalname.split(" ").join("_");
-    callback(null, Date.now() + name);
+    callback(null, Date.now() + "_" + name);
   },
 });
 
@@ -20,7 +22,7 @@ const upload = multer({
     ) {
       callback(null, true);
     } else {
-      callback(null, true);
+      callback(null, false);
     }
   },
 });
