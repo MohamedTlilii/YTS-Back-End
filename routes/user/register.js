@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 module.exports = async (req, res) => {
   try {
     let {
+      // eaze
       // firstName,
       // lastName,
       // address,
