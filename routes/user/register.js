@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 module.exports = async (req, res) => {
   try {
     let {
-      firstName,
-      lastName,
-      address,
-      city,
-      number,
+      // firstName,
+      // lastName,
+      // address,
+      // city,
+      // number,
       userName,
       email,
       password,
@@ -48,11 +48,11 @@ module.exports = async (req, res) => {
     //   bcrypt function
     const hashedPassword = await bcrypt.hash(password, salt);
     const newUser = await new User({
-      firstName,
-      lastName,
-      address,
-      city,
-      number,
+      // firstName,
+      // lastName,
+      // address,
+      // city,
+      // number,
       userName,
       email,
       password: hashedPassword,
