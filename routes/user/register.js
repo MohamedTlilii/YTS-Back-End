@@ -1,71 +1,70 @@
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
+
 module.exports = async (req, res) => {
   try {
-    let {
-      // eaze
-      // firstName,
-      // lastName,
-      // address,
-      // city,
-      // number,
+    const {
       userName,
       email,
       password,
     } = req.body;
+
+    // Check if email already exists
     let existedUser = await User.findOne({ email });
-    let existedUsername = await User.findOne({ userName });
-
     if (existedUser) {
-      return res.status(401).json({
-        status: true,
-        message: "This Email is already existed,please try another one",
-      });
-    }
-    if (existedUsername) {
-      return res.status(401).json({
-        status: true,
-        message: "This Username is already used,please try another one",
+      return res.status(409).json({
+        status: false,
+        message: "This email is already in use, please try another one.",
       });
     }
 
+    // Check if username already exists
+    let existedUsername = await User.findOne({ userName });
+    if (existedUsername) {
+      return res.status(409).json({
+        status: false,
+        message: "This username is already in use, please try another one.",
+      });
+    }
+
+    // Validate password
     if (!password) {
-      return res.status(401).json({
+      return res.status(400).json({
         status: false,
-        error: "Password is required",
+        message: "Password is required.",
       });
     }
-    let validatePassword = password.match(
-      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*@-_).{8,}$/
-    );
+
+    const validatePassword = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*@-_).{8,}$/.test(password);
     if (!validatePassword) {
-      return res.status(401).json({
+      return res.status(400).json({
         status: false,
-        error:
-          "Password must contain least a minimum length of 8 characters, at least one uppercase letter, one lowercase letter, one digit, and one special character:",
+        message: "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one digit, and one special character.",
       });
     }
+
+    // Hash the password
     const salt = await bcrypt.genSalt(10);
-    //   bcrypt function
     const hashedPassword = await bcrypt.hash(password, salt);
-    const newUser = await new User({
-      // firstName,
-      // lastName,
-      // address,
-      // city,
-      // number,
+
+    // Create and save the new user
+    const newUser = new User({
       userName,
       email,
       password: hashedPassword,
     });
     await newUser.save();
-    res
-      .status(200)
-      .json({ status: true, message: "User was created successfully" });
+
+    return res.status(201).json({
+      status: true,
+      message: "User was created successfully.",
+    });
+
   } catch (error) {
-    if (error) {
-      console.log(error);
-    }
-    res.status(401).json({ status: false, error: error.errors });
+    console.error("Error during user registration:", error);
+    return res.status(500).json({
+      status: false,
+      message: "An error occurred during registration. Please try again later.",
+    });
   }
 };
