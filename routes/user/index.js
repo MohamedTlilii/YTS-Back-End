@@ -2,6 +2,7 @@ const express = require("express");
 const route = express.Router();
 const verifiedToken = require("../../middlewares/verifyToken");
 const upload = require("../../middlewares/multer");
+const path = require("path");
 
 // register
 route.post("/register", require("./register"));
@@ -27,7 +28,11 @@ route.put(
 );
 
 
+// Forgot password - initiate reset process
+route.post("/forgotPassword", require("./forgotPassword"));
 
+// Serve the reset password page
+route.put("/resetPasswordPage/:token", require("./resetPasswordPage"));
 
 
 

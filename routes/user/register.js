@@ -32,8 +32,6 @@ module.exports = async (req, res) => {
       });
     }
 
-   
-
     let validatePassword = password.match(
       /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/
     );

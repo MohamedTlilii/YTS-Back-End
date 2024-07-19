@@ -3,30 +3,25 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-  
-
     userName: {
       type: String,
-      required: [true, "Please enter your Username 🥴 "],
+      required: [true, "Please enter your Username"],
     },
     password: {
       type: String,
+      required: [true, "Please enter your Password"],
     },
-    // confirmPassword: {
-    //   type: String,
-    // },
     email: {
       type: String,
-      required: [true, "Please enter your Email ✉️"],
+      required: [true, "Please enter your Email"],
       match: [
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        "This is invalid email",
+        "Invalid email format",
       ],
     },
     imageUrl: {
       type: String,
-      default:
-        "https://static.vecteezy.com/ti/vecteur-libre/p3/12911441-icone-de-profil-d-avatar-par-defaut-dans-le-style-de-ligne-vectoriel.jpg",
+      default: "https://example.com/default_avatar.jpg",
     },
     isUser: {
       type: Boolean,
@@ -36,10 +31,17 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
+    // Fields for resetting password
+    // newPassword: {
+    //   type: String,
+    // },
+    // confirmNewPassword: {
+    //   type: String,
+    // },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-module.exports = User = mongoose.model("users", userSchema);
+module.exports = mongoose.model("User", userSchema);

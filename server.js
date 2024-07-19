@@ -31,8 +31,10 @@ app.use(cors());
 app.use("/api/user", require("./routes/user"));
 // user routes
 
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // path fille uplod bech isob fih
+
 
 
 // listen to requests
