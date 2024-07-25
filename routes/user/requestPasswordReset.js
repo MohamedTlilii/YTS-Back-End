@@ -5,20 +5,11 @@ const User = require('../../models/User'); // Adjust the path according to your 
 const crypto = require('crypto');
 const bcrypt = require("bcrypt");
 
-const resetPasswordPage = async (req, res) => {
+const requestPasswordReset = async (req, res) => {
     try {
         // Extract the token from the URL params
         const token = req.params.token;
-
         // console.log(token);
-
-        // Find the user by the reset password token
-        let user = await User.findOne({ resetPasswordToken: token });
-
-        if (!user) {
-            return res.status(400).json({ error: "Invalid or expired token" });
-        }
-
         // Assuming you are using body-parser or similar middleware to parse JSON bodies
         const { newPassword, confirmNewPassword } = req.body;
 
@@ -38,9 +29,18 @@ const resetPasswordPage = async (req, res) => {
             });
         }
 
-        const resetPasswordToken = crypto.randomBytes(32).toString('hex');
+        // Find the user by the reset password token
+        const user = await User.findOne({ resetPasswordToken: token });
+
+        if (!user) {
+            return res.status(400).json({ error: "Invalid or expired token" });
+        }
+
+
+
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(newPassword, salt);
+        const resetPasswordToken = crypto.randomBytes(32).toString('hex');
 
         // Update the user's password
         user.password = hashedPassword; // Ensure you hash the password before saving
@@ -54,4 +54,4 @@ const resetPasswordPage = async (req, res) => {
     }
 };
 
-module.exports = resetPasswordPage;
+module.exports = requestPasswordReset;

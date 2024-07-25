@@ -31,8 +31,12 @@ route.put(
 // Forgot password - initiate reset process
 route.post("/forgotPassword", require("./forgotPassword"));
 
+
+
+
+
 // Serve the reset password page
-route.put("/resetPasswordPage/:token", require("./resetPasswordPage"));
+route.post("/requestPasswordReset/:token", require("./requestPasswordReset"));
 
 
 

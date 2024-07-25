@@ -1,6 +1,6 @@
 const User = require('../../models/User');
 const crypto = require('crypto');
-const sendgrid = require('../../utils/mailer');
+const mailer = require('../../utils/mailer');
 
 const forgotPassword = async (req, res, next) => {
   const { email } = req.body;
@@ -17,12 +17,12 @@ const forgotPassword = async (req, res, next) => {
 
     // Save reset token and expiry in the database
     user.resetPasswordToken = resetPasswordToken;
-    user.resetPasswordExpires = Date.now() + 3600000; // Token expires in 1 hour
+    user.resetPasswordExpires = Date.now() + 1800000; // Token expires in 30 minutes
     await user.save();
 
     // Send email with password reset link
-    const resetURL = `http://${req.headers.host}/api/user/resetPasswordPage/${resetPasswordToken}`;
-    await sendgrid.sendPasswordResetEmail(user.email, resetURL);
+    const resetURL = `http://localhost:3000/api/user/requestPasswordReset/${resetPasswordToken}`;
+    await mailer.sendPasswordResetEmail(user.email, resetURL);
 
     res.status(200).json({ message: 'Password reset link sent to your email.' });
   } catch (err) {

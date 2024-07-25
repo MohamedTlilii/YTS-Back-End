@@ -33,13 +33,7 @@ const userSchema = new Schema(
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    // Fields for resetting password
-    // newPassword: {
-    //   type: String,
-    // },
-    // confirmNewPassword: {
-    //   type: String,
-    // },
+
   },
   { timestamps: true }
 );
