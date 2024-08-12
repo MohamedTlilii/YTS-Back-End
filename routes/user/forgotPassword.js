@@ -1,7 +1,7 @@
 const User = require('../../models/User');
 const crypto = require('crypto');
 const mailer = require('../../utils/mailer');
-
+// 
 const forgotPassword = async (req, res, next) => {
   const { email } = req.body;
 
