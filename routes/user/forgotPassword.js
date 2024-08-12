@@ -21,7 +21,7 @@ const forgotPassword = async (req, res, next) => {
     await user.save();
 
     // Send email with password reset link
-    const resetURL = `https://ytsyify.netlify.app/api/user/resetPasswordPage/${resetPasswordToken}`;
+    const resetURL = `https://ytsyify.netlify.app/api/user/requestPasswordReset/${resetPasswordToken}`;
     await mailer.sendPasswordResetEmail(user.email, resetURL);
 
     res.status(200).json({ message: 'Password reset link sent to your email.' });
