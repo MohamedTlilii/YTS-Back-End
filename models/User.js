@@ -21,7 +21,7 @@ const userSchema = new Schema(
     },
     imageUrl: {
       type: String,
-      default: "https://example.com/default_avatar.jpg",
+      default: "https://t4.ftcdn.net/jpg/01/24/65/69/360_F_124656969_x3y8YVzvrqFZyv3YLWNo6PJaC88SYxqM.jpg",
     },
     isUser: {
       type: Boolean,

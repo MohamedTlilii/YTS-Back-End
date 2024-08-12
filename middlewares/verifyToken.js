@@ -3,7 +3,7 @@ require("dotenv").config();
 
 module.exports = async (req, res, next) => {
   let SECRET_KEY = process.env.SECRET_KEY;
-  let token = req.headers.authorization;
+  let token = req.headers.token;
 
   if (!token) {
     return res.status(401).json({ status: false, error: "Unauthorized: Token is required" });

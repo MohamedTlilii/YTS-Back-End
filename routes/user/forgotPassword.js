@@ -21,7 +21,7 @@ const forgotPassword = async (req, res, next) => {
     await user.save();
 
     // Send email with password reset link
-    const resetURL = `http://localhost:3000/api/user/requestPasswordReset/${resetPasswordToken}`;
+    const resetURL = `https://yts-back-end.onrender.com/api/user/forgotPassword/${resetPasswordToken}`;
     await mailer.sendPasswordResetEmail(user.email, resetURL);
 
     res.status(200).json({ message: 'Password reset link sent to your email.' });
