@@ -30,7 +30,7 @@ app.use(cors());
 //routes
 app.use("/api/user", require("./routes/user"));
 // user routes
-// app.use("/api/favorit", require("./routes/favorit")); // Correct
+app.use("/api/favorite", require("./routes/favorite")); 
 
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

@@ -20,8 +20,8 @@ const router = express.Router();
 const verifiedToken = require("../../middlewares/verifyToken");
 
 // Define routes
-router.get("/getFav/:userId", verifiedToken, require("./getFav"));
-router.post("/addFav", require("./addFav"));
-router.delete("/deleteFav/:id", require("./deleteFav"));
+router.get("/getFavorites/:userId", require("./getFavorites"));
+router.post("/addFavorite/:userId", require("./addFavorite"));
+router.delete("/removeFavorite/:userId/:movieId", require("./removeFavorite"));
 
 module.exports = router;
