@@ -41,11 +41,6 @@ route.post("/requestPasswordReset/:token", require("./requestPasswordReset"));
 
 
 
-// Add favorite
-route.post("/addFavorite/:userId", require("./addFavorite"));
-
-// Delete favorite
-route.delete("/removeFavorite/:userId/:movieId", require("./removeFavorite"));
 
 
 
