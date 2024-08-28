@@ -18,6 +18,14 @@ const favoriteSchema = new Schema({
   large_cover_image: {
     type: String,
     required: true
+  },
+  rating: {
+    type: String,
+    required: true
+  },
+  genres: {
+    type: [String], // Changed this to an array of strings
+    required: true
   }
 }, { timestamps: true });
 

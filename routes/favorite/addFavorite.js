@@ -2,7 +2,8 @@ const Favorite = require('../../models/Favorite');
 
 module.exports = async (req, res) => {
     const userId = req.params.userId;
-    const { movieId, title, large_cover_image } = req.body;
+    const { movieId, title, large_cover_image, rating, genres
+    } = req.body;
 
     try {
         // Check if the favorite already exists
@@ -12,7 +13,7 @@ module.exports = async (req, res) => {
         }
 
         // Create and save the new favorite
-        const favorite = new Favorite({ userId, movieId, title, large_cover_image });
+        const favorite = new Favorite({ userId, movieId, title, large_cover_image, rating, genres });
         await favorite.save();
 
         return res.status(200).json({ status: true, message: 'Favorite movie added successfully' });
